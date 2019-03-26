@@ -5,12 +5,14 @@
     margin-bottom: 1rem;
 }
 
-.hide{
-    display: none;
+#show-contact{
+    margin-bottom: 10px;
 }
 
-.error{
-    background: red;
-    color: white;
-    padding: 5px;
+.list-group-item{
+    background: #e9ecef;
+    color: black;
+    margin-bottom: 5px;
 }
+
+
