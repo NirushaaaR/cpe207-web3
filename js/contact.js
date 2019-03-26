@@ -1,25 +1,46 @@
-class ContactInformation {
-    constructor(subject, msg, name, gender, phone, email) {
-        this.subject = subject;
-        this.msg = msg;
-        this.name = name;
-        this.gender = gender;
-        this.phone = phone;
-        this.email = email;
-    }
+const myform = document.querySelector("#main-form");
+const ulContactList = document.querySelector("#show-contact");
+const gender = "gender";
+const formsInformation = document.querySelectorAll(".form-group.row");
+
+// add validiation
+formsInformation.forEach(function(form) {
+    form.addEventListener("input", function(){
+        form.classList.add("was-validated");
+    });
+});
+
+myform.addEventListener("submit", addContactList);
+
+function addContactList(e){
+    // prevent reload
+    e.preventDefault();
+    // storing data
+    let li = document.createElement("li");
+
+    formsInformation.forEach(function(form){
+        const label = form.querySelector("label").getAttribute("for");
+        let getValue = "";
+        if(label === "gender"){
+            // check radio button
+            form.querySelectorAll("input").forEach(function(check){
+                if(check.checked){
+                    getValue = check.value;
+                }
+            })
+
+        }else{
+            const value = form.querySelector(".input-form").value;
+            getValue = value;
+        }
+
+        const p = document.createElement("p");
+        p.textContent = `${label} : ${getValue}`;
+        li.appendChild(p);
+    });
+
+    ulContactList.appendChild(li);
 }
 
-const submit_btn = document.querySelector("#submit-btn");
-const form_subject = document.querySelector("#form-subject");
-const form_message = document.querySelector("#form-message");
-const form_name = document.querySelector("#form-name");
-const form_gender_male = document.querySelector("#form-gender-male");
-const form_gender_female = document.querySelector("#form-gender-female");
-const form_phone = document.querySelector("#form-phone");
-const form_email = document.querySelector("#form-email");
 
-submit_btn.addEventListener("submit", add_contact_list);
-
-function add_contact_list(event){
-    console.log(event);
-}
+//was-validated
