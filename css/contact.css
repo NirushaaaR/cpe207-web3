@@ -7,12 +7,14 @@
 
 #show-contact{
     margin-bottom: 10px;
+    background: #e9ecef;
+    border: 2px solid black;
 }
 
 .list-group-item{
-    background: #e9ecef;
-    color: black;
     margin-bottom: 5px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
 }
 
 

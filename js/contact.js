@@ -1,5 +1,5 @@
 const myform = document.querySelector("#main-form");
-const ulContactList = document.querySelector("#show-contact");
+const ulContactList = document.querySelector("#show-contact .list-group");
 const formsInformation = document.querySelectorAll(".form-group.row");
 const gender = "gender";
 const dataKey = "GetJson!!";
@@ -12,7 +12,6 @@ let contactList = oldData === null ? [] : JSON.parse(oldData);
 contactList.forEach( (elem, index) =>{
     updateContactList(elem, index);
 });
-
 
 // add validiation
 formsInformation.forEach(function(form) {
@@ -49,6 +48,7 @@ function addContactList(e){
     // store to local storage
     var jsonString = JSON.stringify(contactList);
     localStorage.setItem(dataKey, jsonString);
+    
 }
 
 function updateContactList(data,index){
@@ -63,7 +63,7 @@ function updateContactList(data,index){
     // loop through object
     Object.entries(data).forEach( entry => {
         const p = document.createElement("p");
-        p.classList.add("p-2","bg-light","border","border-dark","border-round");
+        p.classList.add("p-2","bg-light","border","border-dark");
         p.textContent = `${entry[0]} : ${entry[1]}`;
         divP.appendChild(p);
     });
@@ -74,6 +74,7 @@ function updateContactList(data,index){
     btn.classList.add("btn","btn-danger", "btn-sm", "delete", "align-self-start","ml-3");
     btn.textContent = "X";
     li.appendChild(btn);
+    
     btn.addEventListener("click", (e)=>{
         const temp_li = e.target.parentNode;
         const ul = temp_li.parentNode;
@@ -81,9 +82,11 @@ function updateContactList(data,index){
         // find index
         for(let i =0; i<ul.childElementCount; i++){
             if(check[i] === temp_li){
-                removeContactData(i-1);
+                removeContactData(i);
+                break;
             }
         }
+
         temp_li.parentNode.removeChild(temp_li);
     });
 
@@ -91,6 +94,8 @@ function updateContactList(data,index){
 }
 
 function removeContactData(id){
+    
+    
     contactList = contactList.filter((_,index)=>{
         return index != id;
     });
@@ -98,3 +103,4 @@ function removeContactData(id){
     var jsonString = JSON.stringify(contactList);
     localStorage.setItem(dataKey, jsonString);
 }
+
